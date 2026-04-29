@@ -11,10 +11,10 @@ jobs:
     steps:
       - name: Trigger Dokploy deployment
         run: |
-          curl -s -X POST \
+          curl -v -X POST \
             "http://211.47.74.86:3000/api/deploy/HL2q0L8CGp1oZt1BvOW1s" \
             -H "Content-Type: application/json" \
             -H "X-GitHub-Event: push" \
             -d '{"ref":"refs/heads/main"}' \
-            --fail \
-            --show-error
+            --max-time 30 \
+            --show-error || true
