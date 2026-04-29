@@ -11,10 +11,8 @@ jobs:
     steps:
       - name: Trigger Dokploy deployment
         run: |
-          curl -v -X POST \
-            "http://211.47.74.86:3000/api/deploy/HL2q0L8CGp1oZt1BvOW1s" \
+          curl -s -X POST \
+            "https://console.onestack.run/api/deploy/HL2q0L8CGp1oZt1BvOW1s" \
             -H "Content-Type: application/json" \
-            -H "X-GitHub-Event: push" \
-            -d '{"ref":"refs/heads/main"}' \
-            --max-time 30 \
-            --show-error || true
+            -H "Authorization: Bearer ${{ secrets.ONESTACK_API_KEY }}" \
+            -d '{"ref":"refs/heads/main"}'
